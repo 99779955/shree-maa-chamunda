@@ -69,5 +69,50 @@ footer{background:#082f75;color:white;text-align:center;padding:22px}
 <p>જય માં ચામુંડા 🙏</p>
 <p>© A2Z WORK</p>
 </footer>
+<section class="info" id="customer-form">
+  <h2>ગ્રાહક નોંધણી — A2Z WORK</h2>
+  <form id="customerForm">
+    <label for="customerName">ગ્રાહકનું નામ</label>
+    <input id="customerName" name="name" type="text" required placeholder="પૂરું નામ લખો">
+
+    <label for="customerMobile">મોબાઇલ નંબર</label>
+    <input id="customerMobile" name="mobile" type="tel" required placeholder="મોબાઇલ નંબર લખો">
+
+    <label for="customerService">સર્વિસ પસંદ કરો</label>
+    <select id="customerService" name="service" required>
+      <option value="">સર્વિસ પસંદ કરો</option>
+      <option>ડ્રાઇવિંગ લાઇસન્સ</option>
+      <option>લર્નિંગ લાઇસન્સ</option>
+      <option>ઓનલાઇન ફોર્મ</option>
+      <option>ફોટો અને ડોક્યુમેન્ટ</option>
+      <option>કલર પ્રિન્ટ અને ઝેરોક્ષ</option>
+      <option>અન્ય સર્વિસ</option>
+    </select>
+
+    <label for="customerNotes">નોંધ</label>
+    <textarea id="customerNotes" name="notes" placeholder="સર્વિસની વિગતો લખો"></textarea>
+
+    <button type="submit">ગ્રાહક નોંધો</button>
+    <p id="formMessage" role="status"></p>
+  </form>
+</section>
+
+<script>
+document.getElementById('customerForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const customer = {
+    name: document.getElementById('customerName').value.trim(),
+    mobile: document.getElementById('customerMobile').value.trim(),
+    service: document.getElementById('customerService').value,
+    notes: document.getElementById('customerNotes').value.trim()
+  };
+  const customers = JSON.parse(localStorage.getItem('a2zCustomers') || '[]');
+  customers.push(customer);
+  localStorage.setItem('a2zCustomers', JSON.stringify(customers));
+  document.getElementById('formMessage').textContent =
+    'ગ્રાહકની માહિતી આ મોબાઇલના બ્રાઉઝરમાં સાચવાઈ છે.';
+  this.reset();
+});
+</script>
 </body>
 </html>
